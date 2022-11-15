@@ -3,4 +3,7 @@ from .models import Ticket, Category
 # Register your models here.
 
 admin.site.register(Ticket)
-admin.site.register(Category)
+
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug":("name",)}
+admin.site.register(Category, CategoryAdmin)
