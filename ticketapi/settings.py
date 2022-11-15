@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     # user custom apps
     'tickets',
     # third party apps
-    'rest_framework'
+    'rest_framework',
+    'knox',
 ]
 
 MIDDLEWARE = [
@@ -44,8 +45,10 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+
     'DEFAULT_PERMISSION_CLASSES': [
-      'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+      'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
     ]
 }
 
