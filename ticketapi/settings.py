@@ -1,13 +1,14 @@
 
 from pathlib import Path
 from decouple import config
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4tyk3s#4drn-hiqwxgxff!m8b=g($ga4t!3d90s%_m7a__lvui'
+SECRET_KEY = config('SECRET_KEY') or 'try-!1-a--_guessing_g4m3#$%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -28,7 +29,6 @@ INSTALLED_APPS = [
     'tickets',
     # third party apps
     'rest_framework',
-    'knox',
 ]
 
 MIDDLEWARE = [
@@ -43,13 +43,18 @@ MIDDLEWARE = [
 
 # rest_framewrk settings
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
 
-    'DEFAULT_PERMISSION_CLASSES': [
-      'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-    ]
+# JWToken settings
+SIMPLE_JWT = {
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
+    'ROTATE_REFRESH_TOKENS': True,
 }
 
 ROOT_URLCONF = 'ticketapi.urls'
