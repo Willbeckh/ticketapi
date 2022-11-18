@@ -8,8 +8,9 @@ django = "*"
 djangorestframework = "*"
 psycopg2 = "*"
 python-decouple = "*"
-django-rest-knox = "*"
 cryptography = "*"
+djangorestframework-simplejwt = "*"
+django-filter = "*"
 
 [dev-packages]
 
