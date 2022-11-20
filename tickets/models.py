@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 
@@ -15,7 +16,7 @@ class Ticket(models.Model):
     title = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
-    category = models.ForeignKey("Category", on_delete=models.CASCADE)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE, blank=True, null=True)
     # ticket status trackers
     # * REF: https://docs.djangoproject.com/en/4.1/ref/models/fields/#choices
 
@@ -58,3 +59,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs)
