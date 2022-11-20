@@ -10,24 +10,24 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
-        
+
         # add custom claims
         token['username'] = user.username
         return token
-    
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "username", "email", "is_staff"]
-        
-    
+
+
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = "__all__"
-        
-        
+
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
