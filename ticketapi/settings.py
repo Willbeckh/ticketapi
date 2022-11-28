@@ -114,13 +114,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# logging config
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
