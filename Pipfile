@@ -11,6 +11,8 @@ python-decouple = "*"
 cryptography = "*"
 djangorestframework-simplejwt = "*"
 django-filter = "*"
+apscheduler = "*"
+requests = "*"
 
 [dev-packages]
 
