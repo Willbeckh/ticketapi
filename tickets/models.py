@@ -16,12 +16,13 @@ class Ticket(models.Model):
     title = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
-    category = models.ForeignKey("Category", on_delete=models.CASCADE, blank=True, null=True)
+    category = models.ForeignKey(
+        "Category", on_delete=models.CASCADE, blank=True, null=True)
     # ticket status trackers
     # * REF: https://docs.djangoproject.com/en/4.1/ref/models/fields/#choices
 
     class TicketStatus(models.TextChoices):
-        """This sub class provides status enum in an easy&conc way."""
+        """This sub class provides status enum in an easy way."""
         PENDING = 'Pending', _('Pending')
         CLOSED = 'Closed', _('Closed')
         SOLVED = 'Solved', _("Solved")
@@ -29,7 +30,7 @@ class Ticket(models.Model):
     ticket_status = models.CharField(
         max_length=20, choices=TicketStatus.choices, default=TicketStatus.PENDING)
     ticket_id = models.CharField(max_length=255, blank=True)
-    created_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -37,7 +38,7 @@ class Ticket(models.Model):
         return f"{self.title} - {self.ticket_id}"
 
     def save(self, *args, **kwargs):
-        """Saves the tickect, and generates the unique ID.
+        """Saves the ticket, and generates the unique ID.
 
         kwargs:
         ticket_id -- unique identifier key
@@ -48,6 +49,10 @@ class Ticket(models.Model):
 
         # calls the django save method
         super(Ticket, self).save(*args, **kwargs)
+
+    # delete method
+    def delete(self):
+        return super(Ticket, self).delete()
 
     class Meta:
         ordering = ["-created_at"]
