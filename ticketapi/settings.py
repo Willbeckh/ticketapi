@@ -41,6 +41,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 # rest_framewrk settings
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
