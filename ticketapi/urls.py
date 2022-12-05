@@ -7,6 +7,7 @@ from tickets.models import Ticket, Category
 from rest_framework import routers
 from tickets.views import *
 
+
 # provides automatic dertermination of the URL conf
 router = routers.DefaultRouter()
 router.register(r'api/users', UserViewSet)
@@ -17,5 +18,6 @@ router.register(r'api/category', CategoryViewSet, basename='Category')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
+    path('ping/', ping, name="ping"),
     path('auth/', include('auth.urls')),
 ]
