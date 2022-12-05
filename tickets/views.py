@@ -1,16 +1,22 @@
-from django.shortcuts import render
-from rest_framework import routers, serializers, viewsets
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework_simplejwt.views import TokenObtainPairView
-from tickets.models import Ticket, Category
+import requests
 from tickets.serializers import *
+from rest_framework import viewsets
+from tickets.models import Ticket, Category
 from django.contrib.auth.models import User
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.permissions import IsAuthenticated, AllowAny
+
+# healthchecks ping url
+PING_URL = 'https://hc-ping.com/e238b07e-fa0b-425e-8622-d3f12a959b36'
+
 
 # Create your views here.        
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     
     
 class TicketViewSet(viewsets.ModelViewSet):
@@ -27,3 +33,18 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class MyTokenObtainPairView(TokenObtainPairView):
     permission_classes = [AllowAny]
     serializer_class = MyTokenObtainPairSerializer
+    
+# ping endpoint
+@api_view(['GET'])
+def ping(request):
+    try:
+        # send a GET request to healthchecks.io
+        response = requests.get(PING_URL)
+
+        # check the response
+        if response.status_code == 200:
+            return Response({"response" : "Ping Successful!"})
+        else:
+            return Response(f"Error sending ping: {response.text}")
+    except Exception as e:
+        print(f"Error sending ping: {str(e)}")
