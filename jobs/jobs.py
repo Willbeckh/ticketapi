@@ -40,5 +40,5 @@ def schedule_api():
         if time_diff > 3:
             ticket.delete()
 
-    # Return the last ticket that was processed
-    return ticket
+        # Return the last ticket that was processed
+        return ticket
