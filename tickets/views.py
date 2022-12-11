@@ -37,13 +37,16 @@ class MyTokenObtainPairView(TokenObtainPairView):
 # ping endpoint
 @api_view(['GET'])
 def ping(request):
+    """
+    This method pings healthchecks.io to verify application liveness.
+    """
     try:
         # send a GET request to healthchecks.io
         response = requests.get(PING_URL)
 
         # check the response
         if response.status_code == 200:
-            return Response({"response" : "Ping Successful!"})
+            return Response({ "response" : "Ping Successful!"})
         else:
             return Response(f"Error sending ping: {response.text}")
     except Exception as e:
