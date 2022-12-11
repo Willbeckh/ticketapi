@@ -14,6 +14,7 @@ django-filter = "*"
 apscheduler = "*"
 requests = "*"
 django-cron = "*"
+gunicorn = "*"
 
 [dev-packages]
 
