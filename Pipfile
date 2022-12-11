@@ -15,6 +15,7 @@ apscheduler = "*"
 requests = "*"
 django-cron = "*"
 gunicorn = "*"
+dj-database-url = "*"
 
 [dev-packages]
 
