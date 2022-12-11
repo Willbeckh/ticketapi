@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'tickets',
     # third party apps
     'rest_framework',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
@@ -62,6 +63,17 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
 }
 
+# swagger settings
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'DRF Token': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
+    'USE_SESSION_AUTH': False
+}
 ROOT_URLCONF = 'ticketapi.urls'
 
 TEMPLATES = [
@@ -95,7 +107,7 @@ DATABASES = {
         'HOST': config('DB_HOST'),
         'PORT': ''
     },
-      'test': {
+    'test': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'test_db.sqlite3'),
     }
