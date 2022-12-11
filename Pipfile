@@ -15,6 +15,7 @@ apscheduler = "*"
 requests = "*"
 django-cron = "*"
 gunicorn = "*"
+drf-yasg = {extras = ["validation"], version = "*"}
 
 [dev-packages]
 
