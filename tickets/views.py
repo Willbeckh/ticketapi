@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from drf_yasg.generators import OpenAPISchemaGenerator
 
 # healthchecks ping url
 PING_URL = 'https://hc-ping.com/e238b07e-fa0b-425e-8622-d3f12a959b36'
@@ -51,3 +52,13 @@ def ping(request):
             return Response(f"Error sending ping: {response.text}")
     except Exception as e:
         print(f"Error sending ping: {str(e)}")
+        
+        
+# swagger schemes generator class
+class CustomSchemaGenerator(OpenAPISchemaGenerator):
+    """This class overrides the swagger default schema generator class."""
+    def get_schema(self, request=None, public=False):
+        schema = super().get_schema(request, public)
+        schema.schemes = ["http", "https"]
+        return schema
+    
