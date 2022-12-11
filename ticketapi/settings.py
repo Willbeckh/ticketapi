@@ -1,4 +1,5 @@
 
+import os
 from pathlib import Path
 from decouple import config
 from datetime import timedelta
@@ -13,7 +14,7 @@ SECRET_KEY = config('SECRET_KEY') or 'try-!1-a--_guessing_g4m3#$%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -93,6 +94,10 @@ DATABASES = {
         'PASSWORD': config('DB_PASS'),
         'HOST': config('DB_HOST'),
         'PORT': ''
+    },
+      'test': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'test_db.sqlite3'),
     }
 }
 
