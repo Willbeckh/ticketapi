@@ -14,7 +14,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Ticket API",
         default_version='v1.0.0',
-        description="REST API to create and manage customer tickets ⏯️[open playground on https://ticketapi.up.railway.app/sandbox/]",
+        description="REST API to create and manage customer tickets ⏯️[open playground on:: https://ticketapi.up.railway.app/sandbox/ ]",
         license=openapi.License(name="MIT License"),
     ),
     public=True,
