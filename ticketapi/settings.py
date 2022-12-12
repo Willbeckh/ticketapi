@@ -14,7 +14,7 @@ SECRET_KEY = config('SECRET_KEY',  default='try-!1-a--_guessing_g4m3#$%')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
-APP_MODE=config('APP_MODE')
+APP_MODE = config('APP_MODE')
 
 ALLOWED_HOSTS = ['*']
 
@@ -22,7 +22,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     # user custom apps
     'tickets.apps.TicketsConfig',
-    
+
     # django default
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,6 +43,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 
@@ -120,7 +121,7 @@ else:
     DATABASES = {
         'default': dj_database_url.config(
             default=config('DATABASE_URL'),
-            conn_max_age=600 
+            conn_max_age=600
         )
     }
 
@@ -164,6 +165,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
