@@ -16,6 +16,7 @@ requests = "*"
 django-cron = "*"
 gunicorn = "*"
 dj-database-url = "*"
+drf-yasg = {extras = ["validation"], version = "*"}
 
 [dev-packages]
 

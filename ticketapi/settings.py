@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     # third party apps
     'rest_framework',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,17 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
 }
 
+# swagger settings
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'DRF Token': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
+    'USE_SESSION_AUTH': False
+}
 ROOT_URLCONF = 'ticketapi.urls'
 
 TEMPLATES = [
