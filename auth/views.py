@@ -3,7 +3,10 @@ from .serializers import Register
 from rest_framework.permissions import AllowAny
 from rest_framework import generics
 
+
 class RegisterView(generics.CreateAPIView):
+    """Endpoint to create new users."""
+
     queryset = User.objects.all()
     permission_classes = [AllowAny]
     serializer_class = Register
