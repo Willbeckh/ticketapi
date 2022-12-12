@@ -10,25 +10,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY') or 'try-!1-a--_guessing_g4m3#$%'
+SECRET_KEY = config('SECRET_KEY',  default='try-!1-a--_guessing_g4m3#$%')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
+APP_MODE=config('APP_MODE')
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS')
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 INSTALLED_APPS = [
+    # user custom apps
+    'tickets.apps.TicketsConfig',
+    # django default
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # user custom apps
-    'tickets',
     # third party apps
     'rest_framework',
     'drf_yasg'
@@ -75,6 +76,7 @@ SWAGGER_SETTINGS = {
     },
     'USE_SESSION_AUTH': False
 }
+
 ROOT_URLCONF = 'ticketapi.urls'
 
 TEMPLATES = [
@@ -99,7 +101,7 @@ WSGI_APPLICATION = 'ticketapi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if config('DEBUG') == True:
+if config('APP_MODE') == 'dev':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
