@@ -14,7 +14,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Ticket API",
         default_version='v1.0.0',
-        description="REST API to create and manage customer tickets",
+        description="REST API to create and manage customer tickets ⏯️[open playground on /sandbox/]",
         license=openapi.License(name="MIT License"),
     ),
     public=True,
@@ -24,18 +24,18 @@ schema_view = get_schema_view(
 
 # provides automatic dertermination of the URL conf
 router = routers.DefaultRouter()
-router.register(r'api/users', UserViewSet)
+router.register(r'api/users', UserViewSet, basename="users")
 router.register(r'api/tickets', TicketViewSet)
 router.register(r'api/category', CategoryViewSet, basename='Category')
 
 # wire up paths to router for automatic routing.
 urlpatterns = [
-    path('docs/', schema_view.with_ui('swagger',
-         cache_timeout=0), name='schema-view'),
-    path('documentation/', schema_view.with_ui('redoc',
+    path('', schema_view.with_ui('redoc',
+         cache_timeout=0), name='docs-view'),
+    path('sandbox/', schema_view.with_ui('swagger',
          cache_timeout=0), name='schema-view'),
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
-    path('ping/', ping, name="ping"),
     path('auth/', include('auth.urls')),
+    path('endpoints/', include(router.urls)),
+    path('ping/', ping, name="ping"),
 ]
