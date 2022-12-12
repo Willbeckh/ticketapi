@@ -18,11 +18,11 @@ APP_MODE=config('APP_MODE')
 
 ALLOWED_HOSTS = ['*']
 
-# Application definition
-
+# Application definitio
 INSTALLED_APPS = [
     # user custom apps
     'tickets.apps.TicketsConfig',
+    
     # django default
     'django.contrib.admin',
     'django.contrib.auth',
@@ -68,7 +68,7 @@ SIMPLE_JWT = {
 # swagger settings
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
-        'DRF Token': {
+        'JWT Token': {
             'type': 'apiKey',
             'name': 'Authorization',
             'in': 'header'
@@ -120,7 +120,7 @@ else:
     DATABASES = {
         'default': dj_database_url.config(
             default=config('DATABASE_URL'),
-            conn_max_age=600
+            conn_max_age=600 
         )
     }
 
