@@ -8,6 +8,15 @@ django = "*"
 djangorestframework = "*"
 psycopg2 = "*"
 python-decouple = "*"
+djangorestframework-simplejwt = "*"
+django-filter = "*"
+apscheduler = "*"
+requests = "*"
+django-cron = "*"
+gunicorn = "*"
+drf-yasg = {extras = ["validation"], version = "*"}
+dj-database-url = "*"
+whitenoise = "*"
 
 [dev-packages]
 
