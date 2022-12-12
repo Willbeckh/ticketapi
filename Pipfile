@@ -17,6 +17,7 @@ django-cron = "*"
 gunicorn = "*"
 dj-database-url = "*"
 drf-yasg = {extras = ["validation"], version = "*"}
+"ruamel.yaml.clib" = "*"
 
 [dev-packages]
 
