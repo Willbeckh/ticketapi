@@ -14,10 +14,6 @@ jobs:
             pipenv install
           name: Test it
       - run:
-          name: Run db migrations
-          command: |
-            pipenv run python manage.py migrate
-      - run:
           name: Collect static files
           command: |
             pipenv run python manage.py collectstatic --no-input
@@ -32,5 +28,5 @@ jobs:
 
 workflows:
   main:
-    jobs: 
+    jobs:
       - build
