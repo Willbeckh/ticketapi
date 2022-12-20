@@ -4,15 +4,15 @@ orbs:
 
 jobs:
   build:
-     executor: python/default
-    docker:
-      - image: cimg/python:3.10
+    executor: python/default
     steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pipenv
       - run:
-          name: Install dependencies
           command: |
             pipenv install
-      # - python/run-task
+          name: Test it
       - run:
           name: Run db migrations
           command: |
@@ -31,6 +31,6 @@ jobs:
             git push origin ft-deploy2
 
 workflows:
-  workflow:
+  main:
     jobs: 
       - build
