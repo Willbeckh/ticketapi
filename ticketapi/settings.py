@@ -14,7 +14,7 @@ SECRET_KEY = config('SECRET_KEY',  default='try-!1-a--_guessing_g4m3#$%')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True)
-APP_MODE = config('APP_MODE')
+APP_MODE = config('APP_MODE', default='prod')
 
 ALLOWED_HOSTS = ['*']
 
