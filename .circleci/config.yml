@@ -1,0 +1,35 @@
+version: 2.1
+orbs:
+  python: circleci/python@2.1.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - run:
+          name: Install dependencies
+          command: |
+            pipenv install
+      - python/run-task
+      - run:
+          name: Run db migrations
+          command: |
+            python manage.py migrate
+      - run:
+          name: Collect static files
+          command: |
+            python manage.py collectstatic --no-input
+      - run:
+          name: Execute tests
+          command: |
+            python manage.py test
+      - run:
+          name: Push and Deploy
+          command: |
+            git push origin ft-deploy2
+
+workflows:
+  build_and_deploy:
+    jobs:
+      - build
