@@ -16,15 +16,15 @@ jobs:
       - run:
           name: Run db migrations
           command: |
-            python manage.py migrate
+            pipenv run python manage.py migrate
       - run:
           name: Collect static files
           command: |
-            python manage.py collectstatic --no-input
+            pipenv run python manage.py collectstatic --no-input
       - run:
           name: Execute tests
           command: |
-            python manage.py test
+            pipenv run python manage.py test
       - run:
           name: Push and Deploy
           command: |
