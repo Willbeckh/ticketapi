@@ -14,10 +14,6 @@ jobs:
             pipenv install
           name: Test it
       - run:
-          name: Collect static files
-          command: |
-            pipenv run python manage.py collectstatic 
-      - run:
           name: Execute tests
           command: |
             pipenv run python manage.py test
