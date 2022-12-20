@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Collect static files
           command: |
-            pipenv run python manage.py collectstatic --no-input
+            pipenv run python manage.py collectstatic 
       - run:
           name: Execute tests
           command: |
