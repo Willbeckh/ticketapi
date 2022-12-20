@@ -10,18 +10,18 @@ class UserViewSetTestCase(TestCase):
         # Create a test client
         self.client = APIClient()
 
-    # def tearDown(self):
-        # clear test database
-        # User.objects.all().delete()
-
     def test_list_users(self):
-        # Send a GET request to the viewset's `list` action
-        response = self.client.get('/api/users/')
+        headers = {'Accept': 'application/json'}
+        users_url = 'https://ticketapi.up.railway.app/endpoints/api/users/'
+        # Send a GET request to the viewset's `list` action;
+        response = self.client.get(
+            users_url, headers=headers, format='json')
 
         # Verify that the response has a 200 status code
         self.assertEqual(response.status_code, 200)
 
         results = response.json()  # returns a dict
+
         # extract users list from the api json response
         users_list = results['results']
 
