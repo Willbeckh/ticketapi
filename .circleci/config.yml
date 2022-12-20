@@ -4,9 +4,9 @@ orbs:
 
 jobs:
   build:
+     executor: python/default
     docker:
       - image: cimg/python:3.10
-      executor: python/default
     steps:
       - run:
           name: Install dependencies
