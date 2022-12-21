@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Run db migrations
           command: |
-            pipenv run python migrate
+            pipenv run python manage.py migrate
       - run:
           name: Execute tests
           command: |
