@@ -1,4 +1,3 @@
-
 import os
 from pathlib import Path
 from decouple import config
@@ -14,7 +13,7 @@ SECRET_KEY = config('SECRET_KEY',  default='try-!1-a--_guessing_g4m3#$%')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True)
-APP_MODE = config('APP_MODE', default='prod')
+APP_MODE = config('APP_MODE', default='dev')
 
 ALLOWED_HOSTS = ['*']
 
@@ -101,7 +100,6 @@ WSGI_APPLICATION = 'ticketapi.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 if APP_MODE == 'dev':
     DATABASES = {
         'default': {
@@ -111,19 +109,23 @@ if APP_MODE == 'dev':
             'PASSWORD': config('DB_PASS'),
             'HOST': config('DB_HOST'),
             'PORT': ''
-        },
-        'test': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'test_db.sqlite3'),
         }
     }
-else:
+elif APP_MODE == 'prod':
     DATABASES = {
         'default': dj_database_url.config(
             default=config('DATABASE_URL'),
             conn_max_age=600
         )
     }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'test_db.sqlite3'),
+        }
+    }
+print(APP_MODE)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
