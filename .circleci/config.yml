@@ -21,10 +21,6 @@ jobs:
           name: Execute tests
           command: |
             pipenv run python manage.py test
-      - run:
-          name: Push and Deploy
-          command: |
-            git push origin ft-deploy2
 
 workflows:
   main:
