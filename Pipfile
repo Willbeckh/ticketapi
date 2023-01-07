@@ -17,6 +17,7 @@ drf-yasg = {extras = ["validation"], version = "*"}
 dj-database-url = "*"
 whitenoise = "*"
 psycopg2-binary = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
